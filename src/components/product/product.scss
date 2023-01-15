@@ -1,0 +1,63 @@
+@use '../../global-styles/variables' as v;
+
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 16px;
+  background-color: v.$background-light-primary;
+  transition: v.$transition;
+};
+
+.product__img {
+  margin-bottom: 15px;
+};
+
+.product__img img {
+  display: block;
+  max-width: 120px;
+  height: 183px;
+  margin: 0 auto;
+
+  @media screen and (max-width: v.$width-768) {
+    max-width: 180px;    
+  }
+};
+
+.product__info {
+  width: 100%;
+}
+
+.product__title {
+  display: block;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -1.8px;
+  line-height: 29px;
+  color: v.$text-major;
+  margin-bottom: 15px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.product__info-label {
+  font-weight: 500;
+}
+
+.product__info-item {
+  @media screen and (max-width: v.$width-576) {
+    text-align: center;
+  }  
+}
+
+// ----- special states ----- 
+.product:hover {
+  @media screen and (min-width: v.$width-768) {
+    box-shadow: v.$box-shadow1;
+    transition: v.$transition;
+    cursor: pointer;
+  }
+}
