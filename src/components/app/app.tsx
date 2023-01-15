@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppProvider } from '../../hooks/context';
 import { AppRoute } from '../../constants/constants';
 import MainPage from '../../pages/main-page/main-page';
+import AboutPage from '../../pages/about-page/about-page';
 import NoFoundPage from '../../pages/no-found-page/no-found-page';
 import Catalog from '../catalog/catalog';
 
@@ -16,8 +17,8 @@ function App() {
             {/* <Route path='results/:id' element={<Card /> } /> */}
           </Route>
 
-          {/* <Route path={AppRoute.About} element={<AboutPage />} />
-          <Route path={AppRoute.MyFavorite} element={<FavoritePage />} /> */}
+          <Route path={AppRoute.About} element={<AboutPage />} />
+          {/* <Route path={AppRoute.MyFavorite} element={<FavoritePage />} /> */}
           <Route path={AppRoute.NoFoundPage} element={<NoFoundPage />} />
         </Routes>
       </BrowserRouter>

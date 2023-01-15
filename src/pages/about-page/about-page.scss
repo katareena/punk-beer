@@ -1,0 +1,74 @@
+@use '../../global-styles/variables.scss' as v;
+@use '../../global-styles/mixins' as m;
+
+.about {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5px 45px 45px 45px;
+
+  @media screen and (max-width: v.$width-576) {
+    padding: 5px 25px 45px 25px;
+  }
+}
+
+.about__title {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 18px 0 24px 0;
+
+  @media screen and (max-width: v.$width-768) {
+    padding: 0 0 18px 0;
+  }
+}
+
+.about__box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+
+  @media screen and (max-width: v.$width-768) {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+}
+
+.about__img {
+  display: block;
+  max-width: 520px;
+  width: 100%;
+  height: 670px;
+  background: url('../../assets/about.jpg') center/cover no-repeat;
+
+  @media screen and (max-width: v.$width-768) {
+    max-width: 100%;
+    height: 400px;
+  }
+}
+
+.about__text {
+  @include m.adaptiv-font(40, 30);
+  font-weight: 500;
+  letter-spacing: 1;
+  margin-bottom: 30px;
+
+  @media screen and (max-width: v.$width-576) {
+    margin-bottom: 15px;
+  }
+}
+
+.about__description {
+  @include m.adaptiv-font(26, 18);
+  line-height: 1.3;
+  text-align: justify;
+
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  @media screen and (max-width: v.$width-576) {
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+}
