@@ -1,0 +1,44 @@
+@use './variables' as v;
+
+$maxWidth: 1440;
+
+@mixin adaptiv-font($desktopFontSize, $mobileFontSize) {
+	$addSize: $desktopFontSize - $mobileFontSize;
+	$addMobSize: $addSize + $addSize * 0.7;
+
+	@media (min-width: 767px) {
+		font-size: calc(#{$mobileFontSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+	}
+
+  @media (max-width: 767px) {
+		font-size: calc(#{$mobileFontSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+	}
+}
+
+@mixin title {
+  margin-bottom: 20px;
+
+  & h2 {
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    font-weight: 500;  
+    letter-spacing: -2.5px;
+    @include adaptiv-font(50, 40);
+
+    @media screen and (min-width: v.$maxWidth) {
+      font-size: 50px;
+    }
+  
+    @media screen and (max-width: v.$tabletWidth) {
+      height: 40px;
+      line-height: 40px;
+    }
+  }	
+}
+
+@mixin main-bound {
+	width: 100%;
+  max-width: 1064px;
+  margin: 0 auto;
+}
