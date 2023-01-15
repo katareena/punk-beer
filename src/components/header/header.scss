@@ -1,0 +1,194 @@
+@use '../../global-styles/variables.scss' as v;
+
+.header {
+  position: relative;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 45px;
+
+  @media screen and (max-width: v.$width-576) {
+    padding: 5px 25px;
+  }
+}
+
+.header__box {
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: v.$width-576) {
+    justify-content: space-between;
+    width: 100%;
+  }  
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  color: v.$text-major;
+  cursor: pointer; 
+  margin-left: -4px; 
+
+  & img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+
+    @media screen and (max-width: v.$width-768) {
+      width: 40px;
+      height: 40px;
+      margin-right: 0;
+    }
+  }
+
+  & span {
+    font-size: 30px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    @media screen and (max-width: v.$width-768) {
+      display: none;
+    }
+  }
+}
+
+.header__burger {
+  display: none;
+  width: 50px;
+  height: 50px;
+  transition: all 300ms ease-in-out;
+  z-index: 2;
+
+  & svg {
+    stroke: v.$text-major;
+  }
+
+  @media screen and (max-width: v.$width-576) {
+    display: block;
+  }  
+}
+
+.nav {
+  position: relative;
+  transform: translateX(0);
+
+  @media screen and (max-width: v.$width-576) {
+    height: 100%;
+    width: 240px;
+    padding: 60px 0 30px 0;
+    box-shadow: v.$box-shadow2;
+    transform: translateX(105%);  
+
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1;
+
+    animation-name: navClose;
+    animation-duration: 1s;
+  } 
+}
+
+@keyframes navOpen {
+  from {
+    transform: translateX(105%);    
+  }
+	to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes navClose {
+  from {
+    transform: translateX(0);
+  }
+	to {
+    transform: translateX(105%);
+    
+  }
+}
+
+.nav__list {
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: v.$width-576) {
+    flex-direction: column;
+  }
+}
+
+.nav__item {
+  margin-left: 45px;
+
+  @media screen and (max-width: v.$width-768) {
+    margin-left: 20px;
+  }
+
+  @media screen and (max-width: v.$width-576) {
+    margin-left: 0;
+    width: 100%;  
+  }
+}
+
+.nav__link {
+  font-size: 25px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: v.$text-major;
+  opacity: 0.8;
+
+  @media screen and (max-width: v.$width-768) {
+    font-size: 22px;
+  }
+
+  @media screen and (max-width: v.$width-576) {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 45px;
+    padding: 0 30px 0 30px;
+  }
+}
+
+// ----- special states ----- 
+.logo {
+  @media screen and (min-width: v.$width-768) {
+    cursor: pointer;
+  
+    &:hover,
+    &:focus {
+      color: v.$accent1;
+      outline: none;
+    }    
+  }
+}
+
+.nav__link {
+  @media screen and (min-width: v.$width-768) {
+    cursor: pointer;
+  
+    &:hover {
+      color: v.$accent1;
+      outline: none;
+    }   
+  }
+}
+
+.nav--open {
+  transform: translateX(0);
+  animation-name: navOpen;
+  animation-duration: 1s;
+}
