@@ -94,6 +94,8 @@ input {
   font-family: 'Work Sans', 'Tahoma', sans-serif;
   transition: v.$transition;
   padding: 0;
+  border: none;
+  outline: none;
 }
 
 input::-webkit-outer-spin-button,

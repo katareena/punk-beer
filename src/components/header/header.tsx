@@ -12,6 +12,7 @@ const Header: FunctionComponent = (): JSX.Element => {
 
   return (
     <header className='header'>
+      <h1 className='visually-hidden'>Punk Beer App</h1>
       <div className='header__inner'>
         <div className='header__box'>
           <Link className='logo' to={AppRoute.Root}>

@@ -46,6 +46,10 @@
       height: 40px;
       margin-right: 0;
     }
+
+    @media screen and (max-width: v.$width-576) {
+      margin-right: 20px;
+    } 
   }
 
   & span {
@@ -58,6 +62,11 @@
     @media screen and (max-width: v.$width-768) {
       display: none;
     }
+
+    @media screen and (max-width: v.$width-576) {
+      display: block;
+      font-size: 20px;
+    } 
   }
 }
 
@@ -80,6 +89,7 @@
 .nav {
   position: relative;
   transform: translateX(0);
+  background-color: v.$background-light-primary;
 
   @media screen and (max-width: v.$width-576) {
     height: 100%;
