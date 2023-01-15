@@ -1,24 +1,30 @@
 import React, { FunctionComponent } from 'react';
 import './catalog.scss';
+import { useGlobalContext } from '../../hooks/context';
 import Product from '../product/product';
 
 const Catalog: FunctionComponent = (): JSX.Element => {
+  const {beers, resultTitle, isLoading} = useGlobalContext();
+
   return (
     <section className='catalog'>
-      <h2 className='visually-hidden'>results</h2>
-
       <div className='catalog__inner'>
-        <div className='catalog__box'>
 
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
+        { isLoading
+          ? (<p>Loading...</p>)
+          : (
+            <>
+              <h2 className='catalog__title'>{resultTitle}</h2>
 
-        </div>
+              <div className='catalog__box'>
+                {beers.map((beer) => (
+                  <Product beer={beer} key={beer.id}/>
+                ))}
+              </div>
+            </>
+          )
+        }
+
       </div>
     </section>
   )
