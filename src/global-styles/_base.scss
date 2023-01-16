@@ -106,3 +106,13 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+.message {
+  max-width: 1200px;
+  padding: 0 45px;
+  margin: 20px auto;
+
+  @media screen and (max-width: v.$width-576) {
+    padding: 0 25px;
+  }
+}
