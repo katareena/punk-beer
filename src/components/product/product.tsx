@@ -27,23 +27,14 @@ const Product: FunctionComponent<ProductProps> = ({beer}): JSX.Element => {
 
   return (
     <article className='product'>
-      <div className='product__img'>
-        <img src={normalazeImg} alt={name} />
-      </div>
-
-      <div className='product__info'>
-        <Link to={`/product/${id}`}>
-          <div className='product__info-item'>
-            <span className='product__title'>{name}</span>
-          </div>
-        </Link>
-
-        <div className='product__info-item'>
+      <Link className='product__info' to={`/results/${id}`}>
+        <img className='product__img' src={normalazeImg} alt={name} />
+        <span className='product__title'>{name}</span>
+        <p className='product__info-item'>
           <span className='product__info-label'>Description: </span>
           <span>{normalazeDescription(description)}</span>
-        </div>
-
-      </div>
+        </p>
+      </Link>
     </article>
   )
 }
