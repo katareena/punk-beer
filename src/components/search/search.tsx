@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useRef, useEffect, FormEvent } from 'react';
+import React, { FunctionComponent, useRef, useEffect, FormEvent, useCallback } from 'react';
 import './search.scss';
 import { useGlobalContext } from '../../hooks/use-context';
 import { useNavigate } from 'react-router-dom';
@@ -16,31 +16,40 @@ const Search: FunctionComponent = (): JSX.Element => {
     setIsSearchActive,
     setBeers
   } = useGlobalContext();
-  const searchText = useRef<HTMLInputElement>(null);
+  const searchInput = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  useEffect(() => searchText.current?.focus(), []);
 
-  function handleSubmit(evt: FormEvent<HTMLFormElement>) {
-    evt.preventDefault();
-
-    let tempSearchTerm = searchText.current?.value.trim() || '';
-
-    if((tempSearchTerm.replace(/[^\w\s]/gi, '')).length === 0){
-      setSearchTerm('');
-      setResultTitle(SearchTitle.NoEnter);
-    } else {
-      setSearchTerm(tempSearchTerm);      
-    }
-
-    setIsSearchActive(true);
-    navigate(AppRoute.Results);
-  }
-
-  function handleClick() {
+  const handleReset = useCallback(() => {
     setIsSearchActive(false);
     setSearchTerm('');
     navigate(AppRoute.Root);
     setBeers([]);
+  }, [setIsSearchActive, setSearchTerm, navigate, setBeers])
+
+  useEffect(() => {
+    searchInput.current?.focus();
+
+    if(searchTerm.length === 0) {
+      handleReset();
+    }  
+  
+  }, [searchTerm, handleReset]);
+
+  function handleSubmit(evt: FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
+
+    let tempSearchTerm = searchInput.current?.value.trim() || '';
+
+    if((tempSearchTerm.replace(/[^\w\s]/gi, '')).length === 0){
+      setSearchTerm('');
+      setResultTitle(SearchTitle.NoEnter);
+      setIsSearchActive(false);
+    } else {
+      setSearchTerm(tempSearchTerm);
+      setIsSearchActive(true);     
+    }  
+    
+    navigate(AppRoute.Results); 
   }
 
   return (
@@ -63,7 +72,7 @@ const Search: FunctionComponent = (): JSX.Element => {
             autoComplete='off'
             placeholder='Search...'
             required
-            ref={searchText}
+            ref={searchInput}
             value={searchTerm}
             onChange={(evt)=> setSearchTerm(evt.target.value)}
           />
@@ -71,7 +80,7 @@ const Search: FunctionComponent = (): JSX.Element => {
             className={cn('search__reset', {'search__reset--active': isSearchActive})}
             type='button'
             aria-label='reset search'
-            onClick={handleClick}
+            onClick={handleReset}
           >
             <ResetIcon />
           </button>
