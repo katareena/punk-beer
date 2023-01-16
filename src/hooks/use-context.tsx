@@ -35,8 +35,6 @@ const AppProvider = ({ children }: AppProviderProps) => {
   const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
   const [resultTitle, setResultTitle] = useState<string>('');
 
-  console.log(beers);
-  
   const fetchData = useCallback(async() => {
     setIsLoading(true);
 

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useRef, useEffect, FormEvent, useCallback } from 'react';
+import React, { FunctionComponent, useRef, useEffect, FormEvent, useCallback, ChangeEventHandler } from 'react';
 import './search.scss';
 import { useGlobalContext } from '../../hooks/use-context';
 import { useNavigate } from 'react-router-dom';
@@ -19,28 +19,14 @@ const Search: FunctionComponent = (): JSX.Element => {
   const searchInput = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  const handleReset = useCallback(() => {
-    setIsSearchActive(false);
-    setSearchTerm('');
-    navigate(AppRoute.Root);
-    setBeers([]);
-  }, [setIsSearchActive, setSearchTerm, navigate, setBeers])
-
-  useEffect(() => {
-    searchInput.current?.focus();
-
-    if(searchTerm.length === 0) {
-      handleReset();
-    }  
-  
-  }, [searchTerm, handleReset]);
+  useEffect(() => searchInput.current?.focus(), []);
 
   function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
 
     let tempSearchTerm = searchInput.current?.value.trim() || '';
 
-    if((tempSearchTerm.replace(/[^\w\s]/gi, '')).length === 0){
+    if((! /[^\s]/gim.test(tempSearchTerm))) {
       setSearchTerm('');
       setResultTitle(SearchTitle.NoEnter);
       setIsSearchActive(false);
@@ -50,6 +36,21 @@ const Search: FunctionComponent = (): JSX.Element => {
     }  
     
     navigate(AppRoute.Results); 
+  }
+
+  function handleReset() {
+    setIsSearchActive(false);
+    setSearchTerm('');
+    navigate(AppRoute.Root);
+    setBeers([]);
+  }
+
+  function handleChange(evt: FormEvent<HTMLInputElement>) {
+     if (evt.currentTarget.value.length > 0) {
+      setSearchTerm(evt.currentTarget.value)
+    } else {
+      handleReset();
+    }
   }
 
   return (
@@ -74,7 +75,7 @@ const Search: FunctionComponent = (): JSX.Element => {
             required
             ref={searchInput}
             value={searchTerm}
-            onChange={(evt)=> setSearchTerm(evt.target.value)}
+            onChange={handleChange}
           />
           <button
             className={cn('search__reset', {'search__reset--active': isSearchActive})}
