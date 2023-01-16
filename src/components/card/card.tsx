@@ -3,7 +3,7 @@ import './card.scss'
 import { useParams, useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../../hooks/use-context';
 import { CardBeer } from '../../types/beer';
-import { AppRoute, SearchUrl } from '../../constants/constants';
+import { SearchUrl } from '../../constants/constants';
 import { toCamelCase } from '../../utils/to-camel-case';
 import { ReactComponent as ArrowIcon } from '../../assets/icon-left-arrow.svg';
 import Loading from '../loading/loading';
