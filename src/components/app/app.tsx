@@ -19,12 +19,16 @@ function App() {
           </Route>
 
           <Route path={AppRoute.About} element={<AboutPage />} />
+
           <Route path={AppRoute.MyFavorite} element={
-            <LostPage title='Coming soon...'/>
-          } />
+              <LostPage title='Coming soon...'/>
+            } 
+          />
+
           <Route path={AppRoute.NoFoundPage} element={
-            <LostPage title='404. Page not found'/>
-          } />
+              <LostPage title='404. Page not found'/>
+            } 
+          />
         </Routes>
       </BrowserRouter>
     </AppProvider>

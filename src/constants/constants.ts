@@ -17,3 +17,5 @@ export enum SearchUrl {
   ByName = 'https://api.punkapi.com/v2/beers?beer_name=',
   ById = 'https://api.punkapi.com/v2/beers/',
 }
+
+export const DESKTOP_WHIDTH = 1024;

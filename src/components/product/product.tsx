@@ -10,7 +10,7 @@ type ProductProps = {
 
 const Product: FunctionComponent<ProductProps> = ({beer}): JSX.Element => {
   const { currentPage } = useGlobalContext();
-  const {id, name, imageUrl, description} = beer;
+  const { id, name, imageUrl, description } = beer;
 
   return (
     <article className='product'>
