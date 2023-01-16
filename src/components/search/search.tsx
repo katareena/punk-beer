@@ -8,7 +8,14 @@ import { ReactComponent as LoupeIcon } from '../../assets/icon-loupe.svg';
 import { ReactComponent as ResetIcon } from '../../assets/icon-close.svg';
 
 const Search: FunctionComponent = (): JSX.Element => {
-  const { searchTerm, setSearchTerm, setResultTitle, isSearchActive, setIsSearchActive, setBeers } = useGlobalContext();
+  const {
+    searchTerm,
+    setSearchTerm,
+    setResultTitle,
+    isSearchActive,
+    setIsSearchActive,
+    setBeers
+  } = useGlobalContext();
   const searchText = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   useEffect(() => searchText.current?.focus(), []);
