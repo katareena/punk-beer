@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import './card.scss'
 import { useParams, useNavigate } from 'react-router-dom';
-import { Beer, NewBeer } from '../../types/beer';
+import { CardBeer } from '../../types/beer';
 import { AppRoute, SearchUrl } from '../../constants/constants';
 import { toCamelCase } from '../../utils/to-camel-case';
 import { ReactComponent as ArrowIcon } from '../../assets/icon-left-arrow.svg';
@@ -13,7 +13,7 @@ const Card: FunctionComponent = (): JSX.Element => {
   const navigate = useNavigate();
 
   const [ isLoading, setIsLoading ] = useState(false);
-  const [ beer, setBeer ] = useState<NewBeer | null>(null);
+  const [ beer, setBeer ] = useState<CardBeer | null>(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -22,13 +22,13 @@ const Card: FunctionComponent = (): JSX.Element => {
       try {
         const response = await fetch(`${SearchUrl.ById}${id}`);
         const data = await response.json();
-        const beer: Beer = toCamelCase(data)[0];
-        console.log(beer);
+        const beer = toCamelCase(data)[0];
 
         if(beer) {
-          const { name, imageUrl, tagline, description, abv, foodPairing } = beer;
+          const { id, name, imageUrl, tagline, description, abv, foodPairing } = beer;
 
-          const newBeer: NewBeer = {
+          const newBeer: CardBeer = {
+            id: id,
             name: name,
             imageUrl: imageUrl ? imageUrl : ImgNotAvalebl,
             tagline: tagline, 
@@ -53,8 +53,6 @@ const Card: FunctionComponent = (): JSX.Element => {
     getBookDetails();
 
   }, [id]);
-
-  console.log(beer);
 
   if(isLoading) return <Loading />;
 

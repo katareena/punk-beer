@@ -6,8 +6,9 @@ import {
   useEffect
 } from 'react';
 import { toCamelCase } from '../utils/to-camel-case';
-import { Beer } from '../types/beer';
+import { CatalogBeer } from '../types/beer';
 import { SearchTitle, SearchUrl } from '../constants/constants';
+import ImgNotAvalebl from '../assets/no-image-available.jpg';
 
 type AppProviderProps = {
   children: JSX.Element,
@@ -16,8 +17,8 @@ type AppProviderProps = {
 type ContextProps = {
   searchTerm: string, 
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>,
-  beers: Beer[] | [], 
-  setBeers: React.Dispatch<React.SetStateAction<Beer[] | []>>
+  beers: CatalogBeer[] | [], 
+  setBeers: React.Dispatch<React.SetStateAction<CatalogBeer[] | []>>
   isLoading: boolean,
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,   
   resultTitle: string, 
@@ -29,11 +30,23 @@ type ContextProps = {
 const AppContext = createContext<ContextProps | null>(null);
 
 const AppProvider = ({ children }: AppProviderProps) => {
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [beers, setBeers] = useState<Beer[] | []>([]);    
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
-  const [resultTitle, setResultTitle] = useState<string>('');
+  const [ searchTerm, setSearchTerm ] = useState<string>('');
+  const [ beers, setBeers ] = useState<CatalogBeer[] | []>([]);    
+  const [ isLoading, setIsLoading ] = useState<boolean>(false);
+  const [ isSearchActive, setIsSearchActive ] = useState<boolean>(false);
+  const [ resultTitle, setResultTitle ] = useState<string>('');
+
+  const normalazeDescription = (description: string): string => {
+    if(description.length === 0) {
+      return 'No Description';
+    }
+
+    if(description.length > 140) {
+      return description.substring(0, 140).trim() + '...';
+    }
+
+    return description;
+  }
 
   const fetchData = useCallback(async() => {
     setIsLoading(true);
@@ -43,7 +56,18 @@ const AppProvider = ({ children }: AppProviderProps) => {
       const data = await response.json();
 
       if (data) {
-        setBeers(toCamelCase(data));
+        const newBeers: CatalogBeer[] = toCamelCase(data).map((beer: CatalogBeer) => {
+          const {id, name, imageUrl, description} = beer;
+
+          return {
+            id: id,
+            name: name,
+            imageUrl: imageUrl ? imageUrl : ImgNotAvalebl, 
+            description: normalazeDescription(description),
+          }
+        });
+
+        setBeers(newBeers);
 
         if(data.length > 0){
           setResultTitle(SearchTitle.Results);
