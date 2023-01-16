@@ -27,6 +27,8 @@ type ContextProps = {
   setIsSearchActive: React.Dispatch<React.SetStateAction<boolean>>,
   currentPage: number,
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>,
+  inputValue: string,
+  setInputValue: React.Dispatch<React.SetStateAction<string>>,
 };
 
 const AppContext = createContext<ContextProps | null>(null);
@@ -38,6 +40,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
   const [ isSearchActive, setIsSearchActive ] = useState<boolean>(false);
   const [ resultTitle, setResultTitle ] = useState<string>('');
   const [ currentPage, setCurrentPage ] = useState<number>(1);
+  const [ inputValue, setInputValue ] = useState<string>('');
 
   const normalazeDescription = (description: string): string => {
     if(description.length === 0) {
@@ -75,7 +78,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
         if(data.length > 0){
           setResultTitle(SearchTitle.Results);
         } else {
-          setResultTitle(SearchTitle.NoFound)
+          setResultTitle(SearchTitle.NoFound);
         }
       } else {
         setBeers([]);
@@ -87,6 +90,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
     } catch(error) {
       console.log(error);
       setIsLoading(false);
+      setResultTitle(SearchTitle.Error);
     }
 
   }, [searchTerm]);  
@@ -109,6 +113,8 @@ const AppProvider = ({ children }: AppProviderProps) => {
       setIsSearchActive,
       currentPage,
       setCurrentPage,
+      inputValue,
+      setInputValue,
     }}>
       { children }
     </AppContext.Provider>

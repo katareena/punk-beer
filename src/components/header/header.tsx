@@ -2,15 +2,15 @@ import React, { FunctionComponent, useState } from 'react';
 import './header.scss';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/constants';
-import usePath from '../../hooks/use-path';
 import cn from 'classnames';
+import usePath from '../../hooks/use-path';
 import logo from '../../assets/logo.png';
 import { ReactComponent as BurgerIcon } from '../../assets/icon-burger.svg';
 import { ReactComponent as BurgerCloseIcon } from '../../assets/icon-close.svg';
 
 const Header: FunctionComponent = (): JSX.Element => {
   const [ isBurgerOpen, setIsBurgerOpen ] = useState(false);
-  const path = usePath();
+  const path = usePath()
 
   return (
     <header className='header'>
@@ -35,10 +35,10 @@ const Header: FunctionComponent = (): JSX.Element => {
         <nav className={cn('nav', {'nav--open': isBurgerOpen})}>
           <ul className='nav__list'>
             <li className='nav__item'>
-              <Link className='nav__link' to={AppRoute.MyFavorite}>my favorite</Link>
+              <Link className='nav__link' to={AppRoute.About}>about</Link>
             </li>
             <li className='nav__item'>
-              <Link className='nav__link' to={AppRoute.About}>about</Link>
+              <Link className='nav__link' to={AppRoute.MyFavorite}>my favorite</Link>
             </li>
           </ul>
         </nav>

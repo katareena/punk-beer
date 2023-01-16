@@ -8,8 +8,10 @@ import { ReactComponent as LoupeIcon } from '../../assets/icon-loupe.svg';
 import { ReactComponent as ResetIcon } from '../../assets/icon-close.svg';
 
 const Search: FunctionComponent = (): JSX.Element => {
-  const {
-    searchTerm,
+  const navigate = useNavigate();
+  const searchInput = useRef<HTMLInputElement>(null);
+  useEffect(() => searchInput.current?.focus(), []);
+  const {    
     setSearchTerm,
     setResultTitle,
     isSearchActive,
@@ -17,23 +19,18 @@ const Search: FunctionComponent = (): JSX.Element => {
     setBeers,
     currentPage,
     setCurrentPage,
+    inputValue,
+    setInputValue,
   } = useGlobalContext();
-  const searchInput = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
-
-  useEffect(() => searchInput.current?.focus(), []);
 
   function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
 
-    let tempSearchTerm = searchInput.current?.value.trim() || '';
-
-    if((! /[^\s]/gim.test(tempSearchTerm))) {
-      setSearchTerm('');
+    if((! /[^\s]/gim.test(inputValue))) { //if only spaces are entered      
+      setInputValue('');
       setResultTitle(SearchTitle.NoEnter);
-      setIsSearchActive(false);
     } else {
-      setSearchTerm(tempSearchTerm);
+      setSearchTerm(inputValue);
       setIsSearchActive(true);
       navigate(`results/${currentPage}`);     
     }  
@@ -41,15 +38,17 @@ const Search: FunctionComponent = (): JSX.Element => {
 
   function handleReset() {
     setIsSearchActive(false);
-    setSearchTerm('');
-    navigate(AppRoute.Root); 
+    setSearchTerm('');     
     setBeers([]);
-    setCurrentPage(1);
+    setCurrentPage(1);    
+    setResultTitle('');
+    setInputValue('');
+    navigate(AppRoute.Root);
   }
 
   function handleChange(evt: FormEvent<HTMLInputElement>) {
      if (evt.currentTarget.value.length > 0) {
-      setSearchTerm(evt.currentTarget.value)
+      setInputValue(evt.currentTarget.value);
     } else {
       handleReset();
     }
@@ -75,8 +74,8 @@ const Search: FunctionComponent = (): JSX.Element => {
             autoComplete='off'
             placeholder='Search...'
             required
-            ref={searchInput}
-            value={searchTerm}
+            ref={searchInput} // for focus
+            value={inputValue} 
             onChange={handleChange}
           />
           <button
@@ -91,7 +90,7 @@ const Search: FunctionComponent = (): JSX.Element => {
           <button
             className='search__submit'
             type='submit'
-            aria-label='start a search'
+            aria-label='start to search'
           >
             <LoupeIcon />
           </button>

@@ -10,6 +10,7 @@ export enum SearchTitle {
   Results = 'Your Search Result',
   NoFound = 'No Search Result Found!',
   NoEnter = 'Please Enter Something...',
+  Error = 'Something went wrong :( We are doing our best to fix it!',
 }
 
 export enum SearchUrl {
