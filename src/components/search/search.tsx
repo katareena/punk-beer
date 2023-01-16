@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useRef, useEffect, FormEvent, useCallback, ChangeEventHandler } from 'react';
+import React, { FunctionComponent, useRef, useEffect, FormEvent } from 'react';
 import './search.scss';
 import { useGlobalContext } from '../../hooks/use-context';
 import { useNavigate } from 'react-router-dom';
