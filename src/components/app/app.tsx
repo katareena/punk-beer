@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AppProvider } from '../../hooks/context';
+import { AppProvider } from '../../hooks/use-context';
 import { AppRoute } from '../../constants/constants';
 import MainPage from '../../pages/main-page/main-page';
 import AboutPage from '../../pages/about-page/about-page';

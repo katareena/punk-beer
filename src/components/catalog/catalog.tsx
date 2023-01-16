@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import './catalog.scss';
-import { useGlobalContext } from '../../hooks/context';
+import { useGlobalContext } from '../../hooks/use-context';
 import Product from '../product/product';
 
 const Catalog: FunctionComponent = (): JSX.Element => {

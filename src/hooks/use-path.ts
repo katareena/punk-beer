@@ -1,4 +1,4 @@
-import { useGlobalContext } from '../hooks/context';
+import { useGlobalContext } from './use-context';
 import { AppRoute } from '../constants/constants';
 
 export default function usePath() {
