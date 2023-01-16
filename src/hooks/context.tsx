@@ -7,7 +7,7 @@ import {
 } from 'react';
 import { toCamelCase } from '../utils/to-camel-case';
 import { Beer } from '../types/beer';
-import { URL } from '../constants/constants';
+import { URL, SearchTitle } from '../constants/constants';
 
 type AppProviderProps = {
   children: JSX.Element,
@@ -47,14 +47,14 @@ const AppProvider = ({ children }: AppProviderProps) => {
       if (data) {
         setBeers(toCamelCase(data));
 
-        if(data.length > 1){
-          setResultTitle('Your Search Result');
+        if(data.length > 0){
+          setResultTitle(SearchTitle.Results);
         } else {
-          setResultTitle('No Search Result Found!')
+          setResultTitle(SearchTitle.NoFound)
         }
       } else {
         setBeers([]);
-        setResultTitle('No Search Result Found!');
+        setResultTitle(SearchTitle.NoFound);
       }
 
       setIsLoading(false);
@@ -91,7 +91,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
 export const useGlobalContext = () => {
   const context = useContext(AppContext);
   if (context === null) {
-    throw new Error("AppContext must be inside a Provider with a value");
+    throw new Error('AppContext must be inside a Provider with a value');
   }
   return context;
 }

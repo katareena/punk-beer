@@ -3,7 +3,7 @@ import './search.scss';
 import { useGlobalContext } from '../../hooks/context';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-import { AppRoute } from '../../constants/constants';
+import { AppRoute, SearchTitle } from '../../constants/constants';
 import { ReactComponent as LoupeIcon } from '../../assets/icon-loupe.svg';
 import { ReactComponent as ResetIcon } from '../../assets/icon-close.svg';
 
@@ -20,7 +20,7 @@ const Search: FunctionComponent = (): JSX.Element => {
 
     if((tempSearchTerm.replace(/[^\w\s]/gi, '')).length === 0){
       setSearchTerm('');
-      setResultTitle('Please Enter Something ...');
+      setResultTitle(SearchTitle.NoEnter);
     } else {
       setSearchTerm(tempSearchTerm);      
     }
