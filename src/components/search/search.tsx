@@ -14,7 +14,9 @@ const Search: FunctionComponent = (): JSX.Element => {
     setResultTitle,
     isSearchActive,
     setIsSearchActive,
-    setBeers
+    setBeers,
+    currentPage,
+    setCurrentPage,
   } = useGlobalContext();
   const searchInput = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -32,17 +34,17 @@ const Search: FunctionComponent = (): JSX.Element => {
       setIsSearchActive(false);
     } else {
       setSearchTerm(tempSearchTerm);
-      setIsSearchActive(true);     
+      setIsSearchActive(true);
+      navigate(`results/${currentPage}`);     
     }  
-    
-    navigate(AppRoute.Results); 
   }
 
   function handleReset() {
     setIsSearchActive(false);
     setSearchTerm('');
-    navigate(AppRoute.Root);
+    navigate(AppRoute.Root); 
     setBeers([]);
+    setCurrentPage(1);
   }
 
   function handleChange(evt: FormEvent<HTMLInputElement>) {

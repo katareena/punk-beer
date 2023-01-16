@@ -25,6 +25,8 @@ type ContextProps = {
   setResultTitle: React.Dispatch<React.SetStateAction<string>>,
   isSearchActive: boolean,
   setIsSearchActive: React.Dispatch<React.SetStateAction<boolean>>,
+  currentPage: number,
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>,
 };
 
 const AppContext = createContext<ContextProps | null>(null);
@@ -35,6 +37,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ isSearchActive, setIsSearchActive ] = useState<boolean>(false);
   const [ resultTitle, setResultTitle ] = useState<string>('');
+  const [ currentPage, setCurrentPage ] = useState<number>(1);
 
   const normalazeDescription = (description: string): string => {
     if(description.length === 0) {
@@ -103,7 +106,9 @@ const AppProvider = ({ children }: AppProviderProps) => {
       resultTitle,
       setResultTitle,
       isSearchActive,
-      setIsSearchActive
+      setIsSearchActive,
+      currentPage,
+      setCurrentPage,
     }}>
       { children }
     </AppContext.Provider>

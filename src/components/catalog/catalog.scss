@@ -4,7 +4,7 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px 45px 45px 45px;
+  padding: 20px 45px 20px 45px;
 
   @media screen and (max-width: v.$width-576) {
     padding: 5px 25px;
@@ -12,8 +12,7 @@
 }
 
 .catalog__title {
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .catalog__box {
@@ -21,6 +20,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(205px, 1fr));
   gap: 25px;
+  margin-bottom: 20px;
 
   @media screen and (max-width: v.$width-1024) {
     grid-template-columns: repeat(3, minmax(205px, 1fr));

@@ -14,8 +14,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root} element={<MainPage />}>
-            <Route path='results' element={<Catalog /> } />
-            <Route path='results/:id' element={<Card /> } />
+            <Route path='results/:page' element={<Catalog /> } />
+            <Route path='results/:page/:id' element={<Card /> } />
           </Route>
 
           <Route path={AppRoute.About} element={<AboutPage />} />

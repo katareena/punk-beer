@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import './card.scss'
 import { useParams, useNavigate } from 'react-router-dom';
+import { useGlobalContext } from '../../hooks/use-context';
 import { CardBeer } from '../../types/beer';
 import { AppRoute, SearchUrl } from '../../constants/constants';
 import { toCamelCase } from '../../utils/to-camel-case';
@@ -11,6 +12,7 @@ import ImgNotAvalebl from '../../assets/no-image-available.jpg';
 const Card: FunctionComponent = (): JSX.Element => {  
   const { id } = useParams();
   const navigate = useNavigate();
+  const { currentPage } = useGlobalContext();
 
   const [ isLoading, setIsLoading ] = useState(false);
   const [ beer, setBeer ] = useState<CardBeer | null>(null);
@@ -62,7 +64,8 @@ const Card: FunctionComponent = (): JSX.Element => {
         <button
           className='card__return'
           type='button'
-          onClick={() => navigate(AppRoute.Results)}
+          onClick={() => navigate(`/results/${currentPage}`)}
+          aria-label='return to catalog'
         >
           <ArrowIcon />
           <span>Go Back</span>

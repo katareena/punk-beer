@@ -3,7 +3,7 @@
 
 .search {
   width: 100%;
-  min-height: 75vh;
+  height: 75vh;
   background: url('../../assets/bg.jpg') center/cover no-repeat;
   background-color: v.$background-light-minor3;
   padding: 30px 100px;
@@ -29,26 +29,31 @@
 
 @keyframes active {
   from {
-    min-height: 75vh;  
+    height: 75vh;  
   }
 	to {
-    min-height: 45vh;
+    height: 15vh;
   }
 }
 
 @keyframes normal {
   from {
-    min-height: 45vh;
+    height: 15vh;
   }
 	to {
-    min-height: 75vh;    
+    height: 75vh;    
   }
 }
 
 .search--active {
-  min-height: 45vh;
+  height: 15vh;
   animation-name: active;
   animation-duration: 1s;
+}
+
+.search--active .search__title,
+.search--active .search__text {
+  display: none;
 }
 
 .search__title {
