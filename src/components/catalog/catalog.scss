@@ -7,12 +7,16 @@
   padding: 20px 45px 20px 45px;
 
   @media screen and (max-width: v.$width-576) {
-    padding: 5px 25px;
+    padding: 15px 25px;
   }
 }
 
 .catalog__title {
   margin-bottom: 20px;
+
+  @media screen and (max-width: v.$width-576) {
+    margin-bottom: 15px;
+  }
 }
 
 .catalog__box {
@@ -32,5 +36,6 @@
 
   @media screen and (max-width: v.$width-576) {
     grid-template-columns: repeat(1, minmax(205px, 1fr));
+    gap: 15px;
   }
 }

@@ -15,12 +15,17 @@ const Product: FunctionComponent<ProductProps> = ({beer}): JSX.Element => {
   return (
     <article className='product'>
       <Link className='product__info' to={`/results/${currentPage}/${id}`}>
-        <img className='product__img' src={imageUrl} alt={name} />
-        <span className='product__title'>{name}</span>
-        <p className='product__info-item'>
-          <span className='product__info-label'>Description: </span>
-          <span>{description}</span>
-        </p>
+        <div className='product__img'>
+          <img src={imageUrl} alt={name} />
+        </div>
+        
+        <div>
+          <span className='product__title'>{name}</span>
+          <p className='product__info-item'>
+            <span className='product__info-label'>Description: </span>
+            <span>{description}</span>
+          </p>
+        </div>
       </Link>
     </article>
   )
