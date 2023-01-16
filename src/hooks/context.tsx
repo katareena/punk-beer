@@ -1,5 +1,10 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import { useCallback } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+  useEffect
+} from 'react';
 import { toCamelCase } from '../utils/to-camel-case';
 import { Beer } from '../types/beer';
 import { URL } from '../constants/constants';
@@ -56,6 +61,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
       
     } catch(error) {
       console.log(error);
+      setIsLoading(false);
     }
 
   }, [searchTerm]);  
@@ -65,7 +71,18 @@ const AppProvider = ({ children }: AppProviderProps) => {
   }, [isSearchActive, fetchData]);
 
   return (
-    <AppContext.Provider value = {{ searchTerm, setSearchTerm, beers, setBeers, isLoading, setIsLoading, resultTitle, setResultTitle, isSearchActive, setIsSearchActive }}>
+    <AppContext.Provider value = {{
+      searchTerm,
+      setSearchTerm,
+      beers,
+      setBeers,
+      isLoading,
+      setIsLoading,
+      resultTitle,
+      setResultTitle,
+      isSearchActive,
+      setIsSearchActive
+    }}>
       { children }
     </AppContext.Provider>
   )
