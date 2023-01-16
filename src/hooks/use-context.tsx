@@ -7,7 +7,7 @@ import {
 } from 'react';
 import { toCamelCase } from '../utils/to-camel-case';
 import { Beer } from '../types/beer';
-import { URL, SearchTitle } from '../constants/constants';
+import { SearchTitle, SearchUrl } from '../constants/constants';
 
 type AppProviderProps = {
   children: JSX.Element,
@@ -39,7 +39,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${URL}${searchTerm}`);
+      const response = await fetch(`${SearchUrl.ByName}${searchTerm}`);
       const data = await response.json();
 
       if (data) {

@@ -1,0 +1,13 @@
+@use '../../global-styles/variables.scss' as v;
+
+.loading {
+  display: block;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 45px 45px 45px;
+
+  @media screen and (max-width: v.$width-576) {
+    padding: 5px 25px;
+  }
+}

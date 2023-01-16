@@ -75,3 +75,12 @@ export type Beer = {
   "brewersTips": string,
   "contributedBy": string,
 }
+
+export type NewBeer = {
+  name: string,
+  imageUrl: string,
+  tagline: string, 
+  description: string,
+  abv: number,
+  foodPairing: string[],
+}

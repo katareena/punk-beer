@@ -6,6 +6,7 @@ import MainPage from '../../pages/main-page/main-page';
 import AboutPage from '../../pages/about-page/about-page';
 import LostPage from '../../pages/lost-page/lost-page';
 import Catalog from '../catalog/catalog';
+import Card from '../card/card';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Routes>
           <Route path={AppRoute.Root} element={<MainPage />}>
             <Route path='results' element={<Catalog /> } />
-            {/* <Route path='results/:id' element={<Card /> } /> */}
+            <Route path='results/:id' element={<Card /> } />
           </Route>
 
           <Route path={AppRoute.About} element={<AboutPage />} />
