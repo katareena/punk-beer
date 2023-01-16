@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useState } from 'react';
 import './header.scss';
 import { Link } from 'react-router-dom';
-import { useGlobalContext } from '../../hooks/context';
 import { AppRoute } from '../../constants/constants';
+import usePath from '../../hooks/use-path';
 import cn from 'classnames';
 import logo from '../../assets/logo.png';
 import { ReactComponent as BurgerIcon } from '../../assets/icon-burger.svg';
@@ -10,8 +10,7 @@ import { ReactComponent as BurgerCloseIcon } from '../../assets/icon-close.svg';
 
 const Header: FunctionComponent = (): JSX.Element => {
   const [ isBurgerOpen, setIsBurgerOpen ] = useState(false);
-  const { isSearchActive } = useGlobalContext(); 
-  const path = isSearchActive ? AppRoute.Results : AppRoute.Root;
+  const path = usePath();
 
   return (
     <header className='header'>

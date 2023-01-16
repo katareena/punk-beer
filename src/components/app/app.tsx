@@ -4,7 +4,7 @@ import { AppProvider } from '../../hooks/context';
 import { AppRoute } from '../../constants/constants';
 import MainPage from '../../pages/main-page/main-page';
 import AboutPage from '../../pages/about-page/about-page';
-import NoFoundPage from '../../pages/no-found-page/no-found-page';
+import LostPage from '../../pages/lost-page/lost-page';
 import Catalog from '../catalog/catalog';
 
 function App() {
@@ -18,8 +18,12 @@ function App() {
           </Route>
 
           <Route path={AppRoute.About} element={<AboutPage />} />
-          {/* <Route path={AppRoute.MyFavorite} element={<FavoritePage />} /> */}
-          <Route path={AppRoute.NoFoundPage} element={<NoFoundPage />} />
+          <Route path={AppRoute.MyFavorite} element={
+            <LostPage title='Coming soon...'/>
+          } />
+          <Route path={AppRoute.NoFoundPage} element={
+            <LostPage title='404. Page not found'/>
+          } />
         </Routes>
       </BrowserRouter>
     </AppProvider>
