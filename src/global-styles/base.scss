@@ -1,8 +1,8 @@
 @use './_variables.scss' as v;
 @import '../../node_modules/normalize-scss/sass/normalize';
 @include normalize();
-@import './_fonts.scss';
-@import './_resets';
+@import './fonts.scss';
+@import './resets';
 
 html {
   box-sizing: border-box;
