@@ -15,8 +15,12 @@
   text-align: center;
   color: v.$white;
 
-  animation-name: normal;
+  animation-name: base;
   animation-duration: 1s;
+
+  @media screen and (max-width: v.$width-1024) {
+    animation-name: baseMobile;
+  }
 
   @media screen and (max-width: v.$width-768) {
     padding: 0 45px;
@@ -32,11 +36,29 @@
     height: 75vh;  
   }
 	to {
+    height: calc(100vh - 59px - 532px);
+  }
+}
+
+@keyframes base {
+  from {
+    height: calc(100vh - 59px - 532px);
+  }
+	to {
+    height: 75vh;    
+  }
+}
+
+@keyframes activeMobile {
+  from {
+    height: 75vh;  
+  }
+	to {
     height: 15vh;
   }
 }
 
-@keyframes normal {
+@keyframes baseMobile {
   from {
     height: 15vh;
   }
@@ -46,9 +68,14 @@
 }
 
 .search--active {
-  height: 15vh;
+  height: calc(100vh - 59px - 532px);
   animation-name: active;
   animation-duration: 1s;
+
+  @media screen and (max-width: v.$width-1024) {
+    height: 15vh;
+    animation-name: activeMobile;
+  }
 }
 
 .search--active .search__title,
