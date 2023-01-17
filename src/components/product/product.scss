@@ -3,7 +3,7 @@
 .product {  
   border-radius: 16px;
   transition: v.$transition;
-  background-color: rgba(142, 231, 253, 0.123);
+  background-color: v.$background-card;
 };
 
 .product__info {

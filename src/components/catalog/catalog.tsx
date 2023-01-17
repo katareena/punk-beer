@@ -1,22 +1,32 @@
 import React, { FunctionComponent, useState } from 'react';
 import './catalog.scss';
 import { useGlobalContext } from '../../hooks/use-context';
+import useWindowSize from '../../hooks/use-window-size';
 import { DESKTOP_WHIDTH } from '../../constants/constants';
 import Product from '../product/product';
 import Loading from '../loading/loading';
 import Paginanion from '../pagination/paginanion';
 
 const Catalog: FunctionComponent = (): JSX.Element => {
-  const { beers, resultTitle, isLoading, currentPage, setCurrentPage } = useGlobalContext();  
-  const [ cardPerPage, ] = useState<number>(4);
+  const { beers, resultTitle, isLoading, currentPage, setCurrentPage } = useGlobalContext(); 
+  const [ width, ] = useWindowSize();
 
+  //less then DESKTOP_WHIDTH = add button
+  const NumberOfCards = {
+    Total: beers.length,
+    Init: 6,
+    Adding: 6,
+  }
+  const [ numberOfCards, setNumberOfCards ] = useState<number>(NumberOfCards.Init); 
+  const handleClick = () => setNumberOfCards(numberOfCards + NumberOfCards.Adding);
+
+  // more then DESKTOP_WHIDTH = paginetion
+  const [ cardPerPage, ] = useState<number>(4);
   const indexOfLastPost = currentPage * cardPerPage;
   const indexOfFirstPost = indexOfLastPost - cardPerPage;
-  const currentCards = beers.slice(indexOfFirstPost, indexOfLastPost)
-  const handlePaginete = (pageNumber: number) => setCurrentPage(pageNumber);
+  const handlePaginete = (pageNumber: number) => setCurrentPage(pageNumber);  
 
-  const width = window.innerWidth;
-  const currentBeers = (width > DESKTOP_WHIDTH) ? currentCards : beers;
+  const currentBeers = (width > DESKTOP_WHIDTH) ? beers.slice(indexOfFirstPost, indexOfLastPost) : beers.slice(0, numberOfCards);
 
   if(isLoading) return <Loading />;
 
@@ -36,7 +46,21 @@ const Catalog: FunctionComponent = (): JSX.Element => {
             totalCards={beers.length}
             handlePaginete={handlePaginete}
           />
-        )}        
+        )}
+
+        {width <= DESKTOP_WHIDTH && numberOfCards < NumberOfCards.Total && (
+          <div className='catalog__more'>
+            <button
+              className='catalog__button'
+              type='button'
+              onClick={() => {
+                handleClick()
+              }}
+            >
+              Show more
+            </button>
+        </div>
+        )}       
       </div>
     </section>
   )
