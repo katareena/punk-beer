@@ -19,3 +19,5 @@ export enum SearchUrl {
 }
 
 export const DESKTOP_WHIDTH = 1024;
+
+export const WHITESPACE_REGEXP = /[^\s]/gim;

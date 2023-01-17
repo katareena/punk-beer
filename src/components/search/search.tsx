@@ -3,7 +3,7 @@ import './search.scss';
 import { useGlobalContext } from '../../hooks/use-context';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-import { AppRoute, SearchTitle } from '../../constants/constants';
+import { AppRoute, SearchTitle, WHITESPACE_REGEXP } from '../../constants/constants';
 import { ReactComponent as LoupeIcon } from '../../assets/icon-loupe.svg';
 import { ReactComponent as ResetIcon } from '../../assets/icon-close.svg';
 
@@ -26,7 +26,7 @@ const Search: FunctionComponent = (): JSX.Element => {
   function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
 
-    if((! /[^\s]/gim.test(inputValue))) { //if only spaces are entered      
+    if((!WHITESPACE_REGEXP.test(inputValue))) { //if only spaces are entered      
       setInputValue('');
       setResultTitle(SearchTitle.NoEnter);
     } else {
