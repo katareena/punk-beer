@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
+import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
 import './product.scss'
 import { useParams, useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../../hooks/use-context';
@@ -17,44 +17,44 @@ const Product: FunctionComponent = (): JSX.Element => {
   const [ isLoading, setIsLoading ] = useState(false);
   const [ beer, setBeer ] = useState<ProductBeer | null>(null);
 
-  useEffect(() => {
+  const fetchProductById = useCallback(async() => {
     setIsLoading(true);
 
-    async function getBookDetails() {
-      try {
-        const response = await fetch(`${SearchUrl.ById}${id}`);
-        const data = await response.json();
-        const beer = toCamelCase(data)[0];
+    try {
+      const response = await fetch(`${SearchUrl.ById}${id}`);
+      const data = await response.json();
+      const beer = toCamelCase(data)[0];
 
-        if(beer) {
-          const { id, name, imageUrl, tagline, description, abv, foodPairing } = beer;
+      if(beer) {
+        const { id, name, imageUrl, tagline, description, abv, foodPairing } = beer;
 
-          const newBeer: ProductBeer = {
-            id: id,
-            name: name,
-            imageUrl: imageUrl ? imageUrl : ImgNotAvalebl,
-            tagline: tagline, 
-            description: description ? description : 'No description found',
-            abv: abv,
-            foodPairing: foodPairing,
-          };
+        const newBeer: ProductBeer = {
+          id: id,
+          name: name,
+          imageUrl: imageUrl ? imageUrl : ImgNotAvalebl,
+          tagline: tagline, 
+          description: description ? description : 'No description found',
+          abv: abv,
+          foodPairing: foodPairing,
+        };
 
-          setBeer(newBeer);
-        } else {
-          setBeer(null);
-        }
-
-        setIsLoading(false);
-
-      } catch(error) {
-        console.log(error);
-        setIsLoading(false);
+        setBeer(newBeer);
+      } else {
+        setBeer(null);
       }
+
+      setIsLoading(false);
+
+    } catch(error) {
+      console.log(error);
+      setIsLoading(false);
     }
 
-    getBookDetails();
+  }, [id]); 
 
-  }, [id]);
+  useEffect(() => {
+    fetchProductById();
+  }, [fetchProductById]);
 
   if(isLoading) return <Loading />;
 
@@ -96,7 +96,6 @@ const Product: FunctionComponent = (): JSX.Element => {
               <span>{beer?.foodPairing}</span>
             </p>
           </div>
-
         </div>
       </div>
     </section>
