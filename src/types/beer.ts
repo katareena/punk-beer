@@ -1,4 +1,4 @@
-export type CardBeer = {
+export type ProductBeer = {
   id: number,
   name: string,
   imageUrl: string,

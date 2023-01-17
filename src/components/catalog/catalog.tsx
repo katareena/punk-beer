@@ -3,7 +3,7 @@ import './catalog.scss';
 import { useGlobalContext } from '../../hooks/use-context';
 import useWindowSize from '../../hooks/use-window-size';
 import { DESKTOP_WHIDTH } from '../../constants/constants';
-import Product from '../product/product';
+import CatalogItem from '../catalog-item/catalog-item';
 import Loading from '../loading/loading';
 import Paginanion from '../pagination/paginanion';
 
@@ -36,7 +36,7 @@ const Catalog: FunctionComponent = (): JSX.Element => {
         <h2 className='catalog__title'>{resultTitle}</h2>
         <div className='catalog__box'>
           {currentBeers.map((beer) => (
-            <Product beer={beer} key={beer.id}/>
+            <CatalogItem beer={beer} key={beer.id}/>
           ))}          
         </div>
 
