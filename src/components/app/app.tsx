@@ -3,9 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppProvider } from '../../hooks/use-context';
 import { AppRoute } from '../../constants/constants';
 import MainPage from '../../pages/main-page/main-page';
-import AboutPage from '../../pages/about-page/about-page';
-import LostPage from '../../pages/lost-page/lost-page';
 import Catalog from '../catalog/catalog';
+import LostPage from '../../pages/lost-page/lost-page';
+import AboutPage from '../../pages/about-page/about-page';
 import Product from '../product/product';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path={AppRoute.Root} element={<MainPage />}>
             <Route path='results/:page' element={<Catalog /> } />
-            <Route path='results/:page/:id' element={<Product /> } />
+            <Route path='results/:page/:id' element={<Product />} />
           </Route>
 
           <Route path={AppRoute.About} element={<AboutPage />} />
